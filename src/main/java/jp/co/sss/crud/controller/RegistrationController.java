@@ -28,6 +28,9 @@ public class RegistrationController {
     @GetMapping("/regist/input")
     public String input(@ModelAttribute EmployeeForm employeeForm, Model model) {
 
+    	
+    	employeeForm.setGender(1);
+    	employeeForm.setAuthority(1);
         // セッションチェック（ログインしていない場合はトップへ）
         if (session.getAttribute("user") == null) {
             return "redirect:/";
@@ -52,9 +55,10 @@ public class RegistrationController {
 
     /** 完了画面（DB登録） */
     @PostMapping("/regist/complete")
-    public String complete(@ModelAttribute EmployeeForm employeeForm) {
+    public String complete(EmployeeForm employeeForm) {
 
         // Employee エンティティへ詰め替え
+    	
         Employee employee = new Employee();
         employee.setEmpPass(employeeForm.getEmpPass());
         employee.setEmpName(employeeForm.getEmpName());
@@ -62,6 +66,8 @@ public class RegistrationController {
         employee.setAddress(employeeForm.getAddress());
         employee.setBirthday(employeeForm.getBirthday());
         employee.setAuthority(employeeForm.getAuthority());
+        
+        System.out.print(employeeForm.getEmpPass());
  
         // 部署（Department）をセット
         Department dept = new Department();

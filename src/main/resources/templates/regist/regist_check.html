@@ -37,7 +37,7 @@
 
     <div class="form">
         <div class="label">生年月日：</div>
-        <div class="input" th:text="${employeeForm.birthday}"></div>
+        <div class="input" th:text="${#dates.format(employeeForm.birthday,'yyyy/MM/dd')}"></div>
     </div>
 
     <div class="form">
@@ -50,7 +50,11 @@
 
     <div class="form">
         <div class="label">部署名：</div>
-        <div class="input" th:text="${employeeForm.deptId}"></div>
+        <div class="input" th:switch="${employeeForm.deptId}">
+			<span th:case="1">営業部</span>
+			<span th:case="2">経理部</span>
+			<span th:case="3">総務部</span>
+		</div>
     </div>
 
     <!-- 登録ボタン（complete へ） -->

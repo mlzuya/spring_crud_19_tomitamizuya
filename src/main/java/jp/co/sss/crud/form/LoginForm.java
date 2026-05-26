@@ -1,15 +1,18 @@
 package jp.co.sss.crud.form;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class LoginForm {
-	
+
 	/** 社員ID */
+	
+	@NotBlank(message = "{jakarta.validation.constraints.NotBlank.message}")
 	private Integer empId;
 
 	/** パスワード */
+	@NotBlank(message = "{jakarta.validation.constraints.NotBlank.message}")
+	@Size(max = 16, message = "{jakarta.validation.constraints.Size.message}")
 	private String empPass;
 
 	/**

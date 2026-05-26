@@ -9,12 +9,13 @@ import jp.co.sss.crud.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
-    Employee findByEmpIdAndEmpPass(int empId, String empPass);
+	// ログイン用
+	Employee findByEmpIdAndEmpPass(int empId, String empPass);
 
-    @Query("SELECT e FROM Employee e JOIN FETCH e.department ORDER BY e.empId")
-    List<Employee> findAllWithDepartment();
-    
-    @Query("SELECT e FROM Employee e JOIN FETCH e.department WHERE empName LIKE '田中'")
-    List<Employee> findByempNameLike();
-    
+	// 一覧（JOIN付き）
+	@Query("SELECT e FROM Employee e JOIN FETCH e.department ORDER BY e.empId")
+	List<Employee> findAllWithDepartment();
+
+	// 検索（JOIN付き）
+	List<Employee> findByEmpNameContaining(String keyword);
 }

@@ -2,53 +2,36 @@ package jp.co.sss.crud.form;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class EmployeeForm {
-	/** 社員ID */
-	private Integer empId;
-
-	/** パスワード */
+	@NotBlank(message = "{jakarta.validation.constraints.NotBlank.message}")
+	@Size(max = 16, message = "{jakarta.validation.constraints.Size.message}")
 	private String empPass;
 
-	/** 社員名 */
+	@NotBlank(message = "{jakarta.validation.constraints.NotBlank.message}")
+	@Size(max = 30, message = "{jakarta.validation.constraints.Size.message}")
 	private String empName;
 
-	/** 性別 */
+	@NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
 	private Integer gender;
 
-	/** 住所 */
+	@NotBlank(message = "{jakarta.validation.constraints.NotBlank.message}")
 	private String address;
 
-	/** 生年月日 */
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
 	private Date birthday;
 
-	/** 権限 */
+	@NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
 	private Integer authority;
 
-	/** 部署ID */
+	@NotNull(message = "{jakarta.validation.constraints.NotNull.message}")
 	private Integer deptId;
-
-	/**
-	 * 社員IDの取得
-	 *
-	 * @return 社員ID
-	 */
-	public Integer getEmpId() {
-		return empId;
-	}
-
-	/**
-	 * 社員IDのセット
-	 *
-	 * @param empId
-	 *            社員ID
-	 */
-	public void setEmpId(Integer empId) {
-		this.empId = empId;
-	}
 
 	/**
 	 * パスワードの取得

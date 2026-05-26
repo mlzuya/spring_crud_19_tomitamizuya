@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import jp.co.sss.crud.bean.EmployeeBean;
@@ -15,36 +16,48 @@ import jp.co.sss.crud.repository.EmployeeRepository;
 @Controller
 public class ListController {
 
-    @Autowired
-    EmployeeRepository employeeRepository;
+	@Autowired
+	EmployeeRepository employeeRepository;
 
-    @Autowired
-    HttpSession session;
+	@Autowired
+	HttpSession session;
 
-    @GetMapping("/list")
-    public String list(Model model) {
+	@GetMapping("/list")
+	public String list(Model model) {
 
-        // セッションチェック
-        EmployeeBean user = (EmployeeBean) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/";
-        }
+		// セッションチェック
+		EmployeeBean user = (EmployeeBean) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/";
+		}
 
-        // 社員一覧取得（部署名付き）
-        List<Employee> employeeList = employeeRepository.findAllWithDepartment();
+		// 社員一覧取得（部署名付き）
+		List<Employee> employeeList = employeeRepository.findAllWithDepartment();
 
-        model.addAttribute("employeeList", employeeList);
+		model.addAttribute("employeeList", employeeList);
 
-        return "list/list";
-    }
-    
-    @GetMapping("/list/{name}")
-    public String nameList(Model model) {
-        List<Employee> employeeNameList = employeeRepository.findByempNameLike();
+		return "list/list";
+	}
 
-        model.addAttribute("employeeNameList", employeeNameList);
+	@GetMapping("/list/findByEmpNameContaining")
+	public String search(@RequestParam("keyword") String keyword, Model model) {
 
-        return "list/list";
-    
-    }
+		// セッションチェック
+		EmployeeBean user = (EmployeeBean) session.getAttribute("user");
+		if (user == null) {
+			return "redirect:/";
+		}
+
+		// 部分一致検索
+		List<Employee> employeeList = employeeRepository.findByEmpNameContaining(keyword);
+		
+		if(keyword == null) {
+			return "redirect:/";
+		}else {
+		model.addAttribute("employeeList", employeeList);
+
+		return "list/list";
+		}
+	}
+
 }

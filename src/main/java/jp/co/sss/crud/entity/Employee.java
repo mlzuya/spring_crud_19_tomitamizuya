@@ -2,6 +2,8 @@ package jp.co.sss.crud.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,54 +22,95 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_emp_gen")
 	@SequenceGenerator(name = "seq_emp_gen", sequenceName = "seq_emp", allocationSize = 1)
 	@Column(name = "emp_id")
-    private Integer empId;
+	private Integer empId;
 
-    @Column
-    private String empPass;
+	@Column(name = "emp_pass")
+	private String empPass;
 
-    @Column
-    private String empName;
+	@Column(name = "emp_name")
+	private String empName;
 
-    @Column
-    private Integer gender;
+	@Column(name = "gender")
+	private Integer gender;
 
-    @Column
-    private String address;
+	@Column(name = "address")
+	private String address;
 
-    @Column
-    private Date birthday;
+	@Column(name = "birthday")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private Date birthday;
 
-    @Column
-    private Integer authority;
+	@Column(name = "authority")
+	private Integer authority;
 
-    // ★ 追加：部署（JOIN 用）
-    @ManyToOne
-    @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
-    private Department department;
+	// ★ 追加：部署（JOIN 用）
+	@ManyToOne
+	@JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
+	private Department department;
 
-    // --- getter/setter ---
+	// --- getter/setter ---
 
-    public Integer getEmpId() { return empId; }
-    public void setEmpId(Integer empId) { this.empId = empId; }
+	public Integer getEmpId() {
+		return empId;
+	}
 
-    public String getEmpPass() { return empPass; }
-    public void setEmpPass(String empPass) { this.empPass = empPass; }
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 
-    public String getEmpName() { return empName; }
-    public void setEmpName(String empName) { this.empName = empName; }
+	public String getEmpPass() {
+		return empPass;
+	}
 
-    public Integer getGender() { return gender; }
-    public void setGender(Integer gender) { this.gender = gender; }
+	public void setEmpPass(String empPass) {
+		this.empPass = empPass;
+	}
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+	public String getEmpName() {
+		return empName;
+	}
 
-    public Date getBirthday() { return birthday; }
-    public void setBirthday(Date birthday) { this.birthday = birthday; }
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
 
-    public Integer getAuthority() { return authority; }
-    public void setAuthority(Integer authority) { this.authority = authority; }
+	public Integer getGender() {
+		return gender;
+	}
 
-    public Department getDepartment() { return department; }
-    public void setDepartment(Department department) { this.department = department; }
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public Integer getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Integer authority) {
+		this.authority = authority;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 }

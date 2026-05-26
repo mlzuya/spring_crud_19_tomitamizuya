@@ -9,17 +9,27 @@ import jakarta.persistence.Table;
 @Table(name = "department")
 public class Department {
 
-    @Id
-    private Integer dept_id;
+	@Id
+	private Integer dept_id;
 
-    @Column
-    private String dept_name;
+	@Column
+	private String dept_name;
 
-    // --- getter/setter ---
+	// --- getter/setter ---
 
-    public Integer getDeptId() { return dept_id; }
-    public void setDeptId(Integer deptId) { this.dept_id = deptId; }
+	public Integer getDeptId() {
+		return dept_id;
+	}
 
-    public String getDeptName() { return dept_name; }
-    public void setDeptName(String deptName) { this.dept_name = deptName; }
+	public void setDeptId(Integer deptId) {
+		this.dept_id = deptId;
+	}
+
+	public String getDeptName() {
+		return dept_name;
+	}
+
+	public void setDeptName(String deptName) {
+		this.dept_name = deptName;
+	}
 }
